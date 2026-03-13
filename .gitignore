@@ -1,0 +1,7 @@
+.env
+certs/
+esdata01/
+*.key
+*.crt
+*.pem
+*.zip

@@ -1,0 +1,21 @@
+filebeat.inputs:
+- type: container
+  paths:
+    - '/var/lib/docker/containers/*/*.log'
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+output.elasticsearch:
+  hosts: ["https://es01:9200"]
+  username: ${ELASTIC_USERNAME}
+  password: ${ELASTIC_PASSWORD}
+  ssl:
+    certificate_authorities: ["/usr/share/filebeat/config/certs/ca/ca.crt"]
+    verification_mode: certificate
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
